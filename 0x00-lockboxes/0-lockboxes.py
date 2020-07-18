@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+
 def getKeys(i, keys, boxes):
     """ Try to open boxes depending on the keys """
     if (i < len(boxes)):
@@ -7,6 +8,7 @@ def getKeys(i, keys, boxes):
     else:
         i = len(boxes) - 1
     return keys
+
 
 def updateKeys(oldKeys, boxes, i):
     """ Open boxes with current keys """
@@ -20,6 +22,7 @@ def updateKeys(oldKeys, boxes, i):
             for b in boxes[i]:
                 newKeys.add(b)
     return newKeys
+
 
 def canUnlockAll(boxes):
     """ Unlocks all boxes """
