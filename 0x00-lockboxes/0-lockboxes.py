@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+import sys
+sys.setrecursionlimit(100000)
 
 
 def getKeys(i, keys, boxes):
     """ Try to open boxes depending on the keys """
-    if (i < len(boxes)):
+    if i < len(boxes) - 1 and len(keys) - 1 != len(boxes):
         keys = getKeys(i + 1, updateKeys(keys, boxes, i), boxes)
     else:
         i = len(boxes) - 1
