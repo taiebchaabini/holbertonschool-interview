@@ -23,9 +23,10 @@ def updateKeys(oldKeys, boxes, i):
 
 def canUnlockAll(boxes):
     """ Unlocks all boxes """
-    if (len(boxes) == 1):
+    try:
+        myKeys = set(boxes[0])
+    except:
         return False
-    myKeys = set(boxes[0])
     h = getKeys(0, myKeys, boxes)
     for i in range(1, len(boxes)):
         if i not in h:
