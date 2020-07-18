@@ -28,8 +28,6 @@ def canUnlockAll(boxes):
     """ Unlocks all boxes """
     try:
         myKeys = set(boxes[0])
-        if (len(myKeys) == 0):
-            return False
     except:
         return False
     h = getKeys(0, myKeys, boxes)
