@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-import sys
-sys.setrecursionlimit(100000)
 
 
 def getKeys(i, keys, boxes):
