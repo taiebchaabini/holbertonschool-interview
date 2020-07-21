@@ -3,25 +3,19 @@
 
 def canUnlockAll(boxes):
     """ Unlocks all boxes """
-    try:
-        myKeys = list(boxes[0])
-    except:
-        return False
-    c = 0
-    while(1):
-        c += 1
-        if (c == len(boxes)):
-            break
-        for i in myKeys:
-            try:
-                boxes[i]
-            except:
-                pass
-            else:
-                for b in boxes[i]:
-                    if b not in myKeys and b != 0:
-                        myKeys.append(b)
-    for i in range(1, len(boxes)):
-        if i not in myKeys:
-            return False
-    return True
+    visited = [False for v in range(len(boxes))]
+    notVisited  = [[] for s in range(len(boxes))]
+    stack = [boxes]
+
+    while(len(stack)):
+        element = stack[-1]
+        stack.pop()
+        try:
+            if not visited[element]:
+                visited[element] = True
+            for node in notVisited[element]:
+                if not visited[node]:
+                    stack.append(node) 
+        except:
+            pass
+    return len(visited) == len(boxes)
