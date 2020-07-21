@@ -3,10 +3,6 @@
 
 def canUnlockAll(boxes):
     """ Unlocks all boxes """
-    if (len(boxes) == 1):
-        return True
-    if (len(boxes) <= 0):
-        return False
     visited = [False for v in range(len(boxes))]
     visited[0] = True
     stack = boxes[0]
