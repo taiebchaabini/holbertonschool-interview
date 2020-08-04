@@ -1,18 +1,29 @@
 #include "binary_trees.h"
 
-int heap_swap(heap_t **root, heap_t *new)
+/**
+ * heap_swap - swaps if the new child is lower than its parent 
+ * @new: New value to be swapped
+ * Return: Adress of the new value
+**/
+heap_t *heap_swap(heap_t *new)
 {
-    if ((*root)->n < new->n)
+    int swap = 0;
+    /** Make the swap if the value is greater **/
+    while (new->n > new->parent->n)
     {
-        new->parent = (*root)->parent;
-        (*root)->parent = new;
-        new->left = (*root);
-        *root = new;
-        return 1;
+        swap = new->n;
+        new->n = new->parent->n;
+        new->parent->n = swap;
+        new = new->parent;
     }
-    return 0;
+    return new;
 }
 
+/**
+ * convert_to_binary - Converts integer to a binary
+ * @num: Integer value
+ * Return: Binary values into array of integer
+**/
 int *convert_to_binary(int num){
     static int bin[10], i;
 
@@ -26,7 +37,13 @@ int *convert_to_binary(int num){
     return bin;
 }
 
-unsigned int heap_size(heap_t *head, unsigned int size)
+/**
+* heap_size - Get numbers of element in a binary tree
+* @head: Head of the binary tree
+* @size: Current size of the binary tree
+* Return: Size of the binary tree
+**/
+int heap_size(heap_t *head, int size)
 {   
     if (head->left)
         size = heap_size(head->left, size + 1);
@@ -44,8 +61,7 @@ unsigned int heap_size(heap_t *head, unsigned int size)
 heap_t *heap_insert(heap_t **root, int value)
 {
     heap_t *new, *tmp = *root;
-    unsigned int size = 1, i = 0;
-    int *binary, parent_pos, swap;
+    int *binary, size = 1, i = 0;
 
     new = malloc(sizeof(heap_t));
     if (new == NULL)
@@ -72,23 +88,15 @@ heap_t *heap_insert(heap_t **root, int value)
             }
             i--;
         }
-        parent_pos = binary[i + 1];
+        /* parent_pos = binary[i + 1]; */
         new->parent = tmp;
         if (!tmp->left)
             tmp->left = new;
         else
             tmp->right = new;
-        /** Make the swap if the value is greater **/
-        while (new->n > new->parent->n){
-            swap = new->n;
-            new->n = new->parent->n;
-            new->parent->n = swap;
-            new = new->parent;
-        }
+        new = heap_swap(new);
     }
     else
-    {
         *root = new;
-    }
     return new;
 }
