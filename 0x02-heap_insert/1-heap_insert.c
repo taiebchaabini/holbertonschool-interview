@@ -2,7 +2,8 @@
 
 /**
  * heap_heapify - heapify the tree until the node proper max heap
- * 
+ * @current: Last node found with the binary algorithm
+ * Returns: A pointer to the new current node 
 **/
 heap_t *heap_heapify(heap_t *current)
 {
@@ -45,6 +46,12 @@ heap_t *heap_heapify(heap_t *current)
     }
     return current;
 }
+/**
+ * heap_heapify2 - Heapify child of root if value is greater
+ * @root: Head of the binary tree
+ * @current: Last node found with the binary algorithm
+ * Return: Pointer to the root node
+**/
 heap_t **heap_heapify2(heap_t **root, heap_t *current)
 {
     heap_t *swap, *swapl, *swapr;
@@ -83,27 +90,37 @@ heap_t **heap_heapify2(heap_t **root, heap_t *current)
             (*root) = current->parent;
         }
     }
-    return root;
+    return (root);
 }
 /**
  * heap_swap - swaps if the new child is lower than its parent 
- * @new: New value to be swapped
- * Return: Adress of the new value
+ * @root: Head of the binary tree
+ * @new: new node to be swapped with the root
+ * @tmp: last node returned by the binary algorithm
+ * Return: returns 1 if insertion otherwise 0
 **/
-heap_t *heap_swap(heap_t *new)
+bool heap_swap(heap_t **root, heap_t *new, heap_t *tmp)
 {
-    int swap = 0;
-    /** Make the swap if the value is greater **/
-    while (new->n > new->parent->n)
+    if ((*root) == tmp && new->n > tmp->n)
     {
-        swap = new->n;
-        new->n = new->parent->n;
-        new->parent->n = swap;
-        new = new->parent;
-    }
-    return new;
-}
+        new->parent = NULL;
+        if (tmp->left == new)
+            new->left = tmp;
+        else
+            new->left = tmp->left;
 
+        if (tmp->right == new)
+            new->right = tmp;
+        else
+            new->right = tmp->right;
+        tmp->parent = new;
+        tmp->left = NULL;
+        tmp->right = NULL;
+        (*root) = new;
+        return true;
+    }
+    return false;
+}
 /**
  * convert_to_binary - Converts integer to a binary
  * @num: Integer value
@@ -154,50 +171,34 @@ heap_t *heap_insert(heap_t **root, int value)
     new->n = value;
     new->left = NULL;
     new->right = NULL;
-    if ((*root))
+    if (!(*root)){
+        (*root) = new;
+        return new;
+    }
+    size = heap_size(*root, size);
+    binary = convert_to_binary(size + 1);
+    for (i = binary[0]; i > 0; i--)
     {
-        size = heap_size(*root, size);
-        binary = convert_to_binary(size + 1);
-        i = binary[0];
-        while(i > 0){
-            if (binary[i] == 0){
-                if (tmp->left)
-                    tmp = tmp->left;
-            }
-            else{
-                if (tmp->right)
-                    tmp = tmp->right;
-            }
-            i--;
+        if (binary[i] == 0)
+        {
+            if (tmp->left)
+                tmp = tmp->left;
         }
-        parent_pos = binary[i + 1];
-        new->parent = tmp;
-        if (!tmp->left)
-            tmp->left = new;
         else
-            tmp->right = new;
-        current = new;
-        if ((*root) == tmp && new->n > tmp->n){
-            new->parent = NULL;
-            if (tmp->left == new)
-                new->left = tmp;
-            else
-                new->left = tmp->left;
-
-            if (tmp->right == new)
-                new->right = tmp;
-            else
-                new->right = tmp->right;
-            tmp->parent = new;
-            tmp->left = NULL;
-            tmp->right = NULL;
-            (*root) = new;
-            return new;
+        {
+            if (tmp->right)
+                tmp = tmp->right;
         }
-        current = heap_heapify(current);
-        root = heap_heapify2(root, current);
-        }
+    }
+    parent_pos = binary[i + 1];
+    new->parent = tmp;
+    if (!tmp->left)
+        tmp->left = new;
     else
-        *root = new;
+        tmp->right = new;
+    if (heap_swap(root, new, tmp))
+        return new;
+    current = heap_heapify(new);
+    root = heap_heapify2(root, current);
     return new;
 }
