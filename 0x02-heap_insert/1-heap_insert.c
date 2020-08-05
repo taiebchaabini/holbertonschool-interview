@@ -60,8 +60,8 @@ int heap_size(heap_t *head, int size)
 **/
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *new, *tmp = *root;
-    int *binary, size = 1, i = 0;
+    heap_t *new, *tmp = *root, *swap;
+    int *binary, size = 1, i = 0, parent_pos = 0;
 
     new = malloc(sizeof(heap_t));
     if (new == NULL)
@@ -88,13 +88,28 @@ heap_t *heap_insert(heap_t **root, int value)
             }
             i--;
         }
-        /* parent_pos = binary[i + 1]; */
+        parent_pos = binary[i + 1];
         new->parent = tmp;
         if (!tmp->left)
             tmp->left = new;
         else
             tmp->right = new;
-        new = heap_swap(new);
+        swap = new;
+        printf("Parent pos is %d\n", parent_pos);
+        if (swap->n > swap->parent->n){
+            if (tmp->left != swap)
+                swap->left = tmp->left;
+            else
+                swap->left = tmp;
+            if (tmp->right != swap)
+                swap->right = tmp->right;
+            else
+                swap->right = tmp;
+            tmp->left = NULL;
+            tmp->right = NULL;
+            swap->parent = swap->parent->parent;
+
+        }
     }
     else
         *root = new;
