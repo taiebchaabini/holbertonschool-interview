@@ -1,6 +1,91 @@
 #include "binary_trees.h"
 
 /**
+ * heap_heapify - heapify the tree until the node proper max heap
+ * 
+**/
+heap_t *heap_heapify(heap_t *current)
+{
+    heap_t *swap, *swapl, *swapr;
+    while (current->parent)
+    {
+        if (current->parent)
+        {
+            if (current->n > current->parent->n)
+            {
+                swap = current->parent;
+                swapl = current->parent->left;
+                swapr = current->parent->right;
+                current->parent->left = current->left;
+                current->parent->right = current->right;
+                if (swapl == current)
+                    current->left = current->parent;
+                else
+                    current->left = swapl;
+                if (swapr == current)
+                    current->right = current->parent;
+                else
+                    current->right = swapr;
+                if (current->parent->parent)
+                {
+                    if (current->parent->parent->left == current->parent)
+                        current->parent->parent->left = current;
+                    if (current->parent->parent->right == current->parent)
+                        current->parent->parent->right = current;
+                    current->parent = current->parent->parent;
+                }
+                swap->parent = current;
+                if (current->right && current->right->parent == swap)
+                    current->right->parent = current;
+                if (current->left && current->left->parent == swap)
+                    current->left->parent = current;
+            }
+        }
+        current = current->parent;
+    }
+    return current;
+}
+heap_t **heap_heapify2(heap_t **root, heap_t *current)
+{
+    heap_t *swap, *swapl, *swapr;
+    if (current && current->right)
+    {
+        if (current->right->n > current->n)
+        {
+            swapl = current->right->left;
+            swapr = current->right->right;
+
+            current->right->right = current;
+            current->left->parent = current->right;
+            current->right->left = current->left;
+            current->right->parent = current->parent;
+
+            current->parent = current->right;
+            current->left = swapl;
+            current->right = swapr;
+            (*root) = current->parent;
+        }
+    }
+    if (current && current->left)
+    {
+        if (current->left->n > current->n)
+        {
+            swapl = current->left->left;
+            swapr = current->left->right;
+
+            current->left->right = current;
+            current->left->left = current->left;
+            current->left->parent = current->parent;
+
+            current->parent = current->left;
+            current->left = swapl;
+            current->right = swapr;
+            (*root) = current->parent;
+        }
+    }
+    return root;
+}
+/**
  * heap_swap - swaps if the new child is lower than its parent 
  * @new: New value to be swapped
  * Return: Adress of the new value
@@ -60,21 +145,18 @@ int heap_size(heap_t *head, int size)
 **/
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *new, *tmp = *root, *swap;
+    heap_t *new, *tmp = *root, *current;
     int *binary, size = 1, i = 0, parent_pos = 0;
-
     new = malloc(sizeof(heap_t));
     if (new == NULL)
         return NULL;
+    new->parent = NULL;
     new->n = value;
     new->left = NULL;
     new->right = NULL;
     if ((*root))
     {
         size = heap_size(*root, size);
-        /*
-        printf("Binary tree size is %d\n", size);
-        */
         binary = convert_to_binary(size + 1);
         i = binary[0];
         while(i > 0){
@@ -94,23 +176,27 @@ heap_t *heap_insert(heap_t **root, int value)
             tmp->left = new;
         else
             tmp->right = new;
-        swap = new;
-        printf("Parent pos is %d\n", parent_pos);
-        if (swap->n > swap->parent->n){
-            if (tmp->left != swap)
-                swap->left = tmp->left;
+        current = new;
+        if ((*root) == tmp && new->n > tmp->n){
+            new->parent = NULL;
+            if (tmp->left == new)
+                new->left = tmp;
             else
-                swap->left = tmp;
-            if (tmp->right != swap)
-                swap->right = tmp->right;
+                new->left = tmp->left;
+
+            if (tmp->right == new)
+                new->right = tmp;
             else
-                swap->right = tmp;
+                new->right = tmp->right;
+            tmp->parent = new;
             tmp->left = NULL;
             tmp->right = NULL;
-            swap->parent = swap->parent->parent;
-
+            (*root) = new;
+            return new;
         }
-    }
+        current = heap_heapify(current);
+        root = heap_heapify2(root, current);
+        }
     else
         *root = new;
     return new;
