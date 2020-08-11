@@ -13,6 +13,4 @@ def minOperations(n):
             copy = output
             output += copy
         i += 1
-    if (i == n):
-        return i
-    return i + 1
+    return i
