@@ -4,8 +4,8 @@ def minOperations(n):
     copy = "H"
     output = ""
     i = 0
-    if (n == 1):
-        return 1
+    if (n < 2):
+        return 0
     while (len(output) < n):
         if (i % 2 == 0):
             output += copy
