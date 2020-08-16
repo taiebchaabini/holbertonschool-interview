@@ -1,5 +1,24 @@
 #include "sandpiles.h"
 /**
+ * sandpiles_print - Function to print grid
+ * @grid: Grid to print
+**/
+void sandpiles_print(int grid[3][3])
+{
+	int i, j;
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			if (j)
+				printf(" ");
+			printf("%d", grid[i][j]);
+		}
+		printf("\n");
+	}
+}
+/**
  * sandpiles_check - Checks if sandpiles is stable
  * @grid1: grid to check
  * Return: 1 if the sandpiles is stable otherwise 0
@@ -113,7 +132,7 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		if (check_sandpiles == 0)
 		{
 			printf("=\n");
-			print_grid(grid1);
+			sandpiles_print(grid1);
 		}
 		else
 			return;
