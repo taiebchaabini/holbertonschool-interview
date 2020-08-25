@@ -17,7 +17,8 @@ int is_palindrome(listint_t **head)
 		return (1);
 	for (counter = 0; oldHead; oldHead = oldHead->next, counter++)
 		list[counter] = oldHead->n;
-	for (counter = 0; counter < i; counter++){
+	for (counter = 0; counter < i; counter++)
+	{
 		if (list[counter] != list[(i - counter) - 1])
 			return (0);
 	}
