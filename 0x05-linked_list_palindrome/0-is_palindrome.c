@@ -8,33 +8,18 @@
 int is_palindrome(listint_t **head)
 {
 	listint_t *oldHead = *head;
-	listint_t *pt1 = *head;
 	int counter = 0, i = 0;
+	int list[2048];
 
 	for (i = 0; oldHead; i++)
 		oldHead = oldHead->next;
 	if (i == 0)
 		return (1);
-	oldHead = pt1;
-	while (oldHead)
-	{
-		if (oldHead->next && oldHead->next->next == NULL)
-		{
-			if (pt1->n == oldHead->next->n)
-			{
-				oldHead->next = NULL;
-				pt1 = pt1->next;
-				oldHead = pt1;
-				counter += 2;
-			}
-		}
-		else if (counter != 0 && pt1->n == oldHead->n)
-			counter += 2;
-		oldHead = oldHead->next;
+	for (counter = 0; oldHead; oldHead = oldHead->next, counter++)
+		list[counter] = oldHead->n;
+	for (counter = 0; counter < i; counter++){
+		if (list[counter] != list[(i - counter) - 1])
+			return (0);
 	}
-	if (pt1->next == NULL)
-		counter++;
-	if (counter == i)
-		return (1);
-	return (0);
+	return (1);
 }
