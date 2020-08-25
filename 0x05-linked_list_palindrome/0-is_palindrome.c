@@ -13,6 +13,8 @@ int is_palindrome(listint_t **head)
 
 	for (i = 0; oldHead; i++)
 		oldHead = oldHead->next;
+	if (i == 0)
+		return (1);
 	oldHead = pt1;
 	while (oldHead)
 	{
