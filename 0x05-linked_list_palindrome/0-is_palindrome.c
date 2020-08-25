@@ -15,11 +15,12 @@ int is_palindrome(listint_t **head)
 		oldHead = oldHead->next;
 	if (i == 0)
 		return (1);
+	oldHead = *head;
 	for (counter = 0; oldHead; oldHead = oldHead->next, counter++)
 		list[counter] = oldHead->n;
 	for (counter = 0; counter < i; counter++)
 	{
-		if (list[counter] != list[i - counter])
+		if (list[counter] != list[i - counter - 1])
 			return (0);
 	}
 	return (1);
