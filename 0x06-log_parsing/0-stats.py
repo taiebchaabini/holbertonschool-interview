@@ -14,7 +14,7 @@ def signal_handler(sig, frame):
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 for line in sys.stdin:
-    b = [str(x) for x in line.split(' ') if x.strip()]
+    b = [str(x) for x in line.rstrip().split(' ') if x.strip()]
     key = b[-2]
     if (key in metrics.keys()):
         metrics[key] += 1
