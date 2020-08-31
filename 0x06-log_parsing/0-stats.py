@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import sys
 import collections
 """ Script that reads stdin line by line and computes metrics. """
