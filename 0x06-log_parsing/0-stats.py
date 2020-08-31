@@ -12,7 +12,7 @@ for line in sys.stdin:
     if (key in metrics.keys()):
         metrics[key] += 1
     else:
-        metrics[key] = 0
+        metrics[key] = 1
     size += int(b[-1])
     i += 1
     if (i == 10):
