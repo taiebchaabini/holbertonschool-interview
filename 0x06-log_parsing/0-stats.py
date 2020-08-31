@@ -2,6 +2,7 @@
 import sys
 import collections
 import signal
+""" Script that reads stdin line by line and computes metrics. """
 
 i = 0
 size = 0
