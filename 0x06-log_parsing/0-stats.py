@@ -1,13 +1,10 @@
 #!/usr/bin/python3
 import sys
-import collections
 import signal
-
-
 i = 0
 size = 0
 key = ""
-metrics = collections.OrderedDict({})
+metrics = {}
 def print_stuff():
     print("File size: " + str(size))
     for k in sorted(metrics):
