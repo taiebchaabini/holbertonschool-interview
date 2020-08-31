@@ -9,9 +9,9 @@ metrics = collections.OrderedDict({})
 for line in sys.stdin:
     b = [str(x) for x in line.split(' ') if x.strip()]
     key = b[-2]
-    try:
+    if (key in metrics.keys()):
         metrics[key] += 1
-    except:
+    else:
         metrics[key] = 0
     size += int(b[-1])
     i += 1
