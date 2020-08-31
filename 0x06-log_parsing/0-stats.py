@@ -28,4 +28,3 @@ for line in sys.stdin:
     if (i == 10):
         print_stuff()
         i = 0
-
