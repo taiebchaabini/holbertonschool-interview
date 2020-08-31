@@ -1,17 +1,24 @@
 #!/usr/bin/python3
 import sys
-
+import collections
+import signal
 
 i = 0
 size = 0
 key = ""
-metrics = {}
+metrics = collections.OrderedDict({})
+""" Prints file isze + metrics """
 def print_stuff():
     print("File size: " + str(size))
     for k in sorted(metrics):
         print(k + ": " + str(metrics[k]))
+""" Check if ctrl + c is pressed then prints metrics """
+def signal_handler(sig, frame):
+    print_stuff()
+    sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
 for line in sys.stdin:
-    b = [str(x) for x in line.rstrip().split(' ') if x.strip()]
+    b = [str(x) for x in line.split(' ') if x.strip()]
     key = b[-2]
     if (key in metrics.keys()):
         metrics[key] += 1
@@ -22,3 +29,4 @@ for line in sys.stdin:
     if (i == 10):
         print_stuff()
         i = 0
+
