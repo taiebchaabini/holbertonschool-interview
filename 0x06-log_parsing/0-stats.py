@@ -24,7 +24,8 @@ try:
             if (key in metrics.keys()):
                 metrics[key] += 1
             else:
-                if key in ['200', '301', '400', '401', '403', '404', '405', '500']:
+                if key in ['200', '301', '400', '401', '403', '\
+                        404', '405', '500']:
                     metrics[key] = 1
             size += int(b[-1])
         i += 1
