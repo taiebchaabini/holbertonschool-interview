@@ -18,14 +18,15 @@ def print_stuff():
 
 try:
     for line in sys.stdin:
-        b = [str(x) for x in line.split(' ') if x.strip()]
-        key = b[-2]
-        if (key in metrics.keys()):
-            metrics[key] += 1
-        else:
-            if int(key) in [200, 301, 400, 401, 403, 404, 405, 500]:
-                metrics[key] = 1
-        size += int(b[-1])
+        b = [str(x) for x in line.split(' ')]
+        if len(b) > 2:
+            key = b[-2]
+            if (key in metrics.keys()):
+                metrics[key] += 1
+            else:
+                if int(key) in [200, 301, 400, 401, 403, 404, 405, 500]:
+                    metrics[key] = 1
+            size += int(b[-1])
         i += 1
         if (i == 10):
             print_stuff()
