@@ -7,6 +7,7 @@ i = 0
 size = 0
 key = ""
 metrics = collections.OrderedDict({})
+possible_code = ['200', '301', '400', '401', '403', '404', '405', '500']:
 
 
 def print_stuff():
@@ -24,8 +25,7 @@ try:
             if (key in metrics.keys()):
                 metrics[key] += 1
             else:
-                if key in ['200', '301', '400', '401', '403', '\
-                        404', '405', '500']:
+                if key in possible_code:
                     metrics[key] = 1
             size += int(b[-1])
         i += 1
