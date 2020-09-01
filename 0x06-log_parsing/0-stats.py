@@ -11,9 +11,9 @@ metrics = collections.OrderedDict({})
 
 def print_stuff():
     """ Prints file isze + metrics """
-    print("File size: " + str(size))
+    print("File size: {}".format(str(size)))
     for k in sorted(metrics):
-        print(k + ": " + str(metrics[k]))
+        print("{}: {}".format(str(k), str(metrics[k])))
 
 
 try:
