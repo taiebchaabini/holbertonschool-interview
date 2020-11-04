@@ -49,12 +49,8 @@ avl_t *insert_start_end(avl_t *start, int *array, int first, int last)
 	}
 	head = insert_into_avl(head, array[mid]);
 
-
-
-
 	head->left = insert_start_end(head, array, first, mid - 1);
 	head->right = insert_start_end(head, array, mid + 1, last);
-
 
 	return (head);
 }
@@ -78,3 +74,4 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 
 	return (head);
 }
+
