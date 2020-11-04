@@ -44,7 +44,7 @@ avl_t *insert_start_end(avl_t *start, int *array, int first, int last)
 	head = insert_into_avl(head, array[mid]);
 
 	if (head == NULL)
-	return (NULL);
+		return (NULL);
 
 	head->left = insert_start_end(head, array, first, mid - 1);
 	head->right = insert_start_end(head, array, mid + 1, last);
@@ -64,9 +64,11 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	avl_t *head = NULL;
 	size_t i = 0;
 
-	
-	while(i < size - 1){
-		if (array[i] > array[size - 1]){
+
+	while (i < size - 1)
+	{
+		if (array[i] > array[size - 1])
+		{
 			return (NULL);
 		}
 		i++;
