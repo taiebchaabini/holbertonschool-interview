@@ -63,8 +63,6 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	avl_t *head = NULL;
 
 	head = insert_start_end(NULL, array, 0, size - 1);
-	if (head == NULL)
-		return (NULL);
 
 	return (head);
 }
