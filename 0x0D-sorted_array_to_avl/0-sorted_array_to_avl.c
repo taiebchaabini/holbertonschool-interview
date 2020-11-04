@@ -39,9 +39,8 @@ avl_t *insert_start_end(avl_t *start, int *array, int first, int last)
 	if (first > last)
 		return (NULL);
 
-	if (start == NULL)
-		head = insert_into_avl(NULL, array[mid]);
-	head = insert_into_avl(head, array[mid]);
+	
+	head = insert_into_avl(start, array[mid]);
 
 	if (head == NULL)
 		return (NULL);
