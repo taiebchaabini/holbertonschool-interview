@@ -35,13 +35,13 @@ avl_t *insert_into_avl(avl_t *head, int value)
  **/
 avl_t *insert_start_end(avl_t *start, int *array, int first, int last)
 {
+	int mid = (first + last) / 2;
+	avl_t *head;
+
 	if (first > last)
 	{
 		return (NULL);
 	}
-
-	int mid = (first + last) / 2;
-	avl_t *head;
 
 	if (start == NULL)
 	{
