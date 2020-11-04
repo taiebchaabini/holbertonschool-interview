@@ -13,9 +13,7 @@ avl_t *insert_into_avl(avl_t *head, int value)
 
 	new = malloc(sizeof(avl_t));
 	if (new == NULL)
-	{
 		return (NULL);
-	}
 	new->n = value;
 	new->left = NULL;
 	new->right = NULL;
@@ -39,9 +37,7 @@ avl_t *insert_start_end(avl_t *start, int *array, int first, int last)
 	avl_t *head;
 
 	if (first > last)
-	{
 		return (NULL);
-	}
 
 	if (start == NULL)
 	{
@@ -71,9 +67,7 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 
 	head = insert_start_end(NULL, array, 0, size - 1);
 	if (head == NULL)
-	{
 		return (NULL);
-	}
 
 	return (head);
 }
