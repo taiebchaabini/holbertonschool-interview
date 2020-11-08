@@ -16,12 +16,14 @@
  */
 typedef struct skiplist_s
 {
-    int n;
-    size_t index;
-    struct skiplist_s *next;
-    struct skiplist_s *express;
+	int n;
+	size_t index;
+	struct skiplist_s *next;
+	struct skiplist_s *express;
 } skiplist_t;
 
+void print_checked(size_t first, int second);
+void print_found(size_t first, size_t second);
 skiplist_t *linear_skip(skiplist_t *list, int value);
 
 #endif
