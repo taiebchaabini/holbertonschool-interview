@@ -1,23 +1,37 @@
 #include "search.h"
 
 /**
- * print_checked - Prints the index and value on which the value is checked.
+ * pChecked - Prints the index and value on which the value is checked.
  * @first: index.
  * @second: value
  **/
-void print_checked(size_t first, int second)
+void pChecked(size_t first, int second)
 {
 	printf("Value checked at index [%ld] = [%d]\n", first, second);
 }
 
 /**
- * print_found - Prints between which indexes the value has been found
- * @first: first index value
- * @second: second index value
+ * search - Search and prints between which indexes
+ * the value has been found
+ * @nlane: Lane on which we check the value
+ * @f: first index value
+ * @s: second index value
+ * @value: Value to search
+ *
+ * Return: Pointer to node's value.
  **/
-void print_found(size_t first, size_t second)
+skiplist_t *search(skiplist_t *nlane, size_t f, size_t s, int value)
 {
-	printf("Value found between indexes [%ld] and [%ld]\n", first, second);
+	printf("Value found between indexes [%ld] and [%ld]\n", f, s);
+	while (nlane)
+	{
+		pChecked(nlane->index, nlane->n);
+		if (nlane->n == value)
+		{
+			return (nlane);
+		}
+		nlane = nlane->next;
+	}
 }
 
 
@@ -30,39 +44,37 @@ void print_found(size_t first, size_t second)
  **/
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-	skiplist_t *head;
 	skiplist_t *express;
+	skiplist_t *lastExpress;
+	size_t index;
 
 	if (list == NULL)
 		return (NULL);
 
-	head = list;
-	express = head->express;
+	express = list->express;
 
-	while (head->next)
+	if (express->n >= value)
 	{
-		if (head->express)
-		{
-			express = head->express;
-			if (express->n > value)
-			{
-				if (head->index != 0)
-					print_checked(head->index, head->n);
-				print_checked(express->index, express->n);
-				print_found(head->index, express->index);
-				while (head)
-				{
-					print_checked(head->index, head->n);
-					if (head->n == value)
-						return (head);
-					head = head->next;
-				}
-			}
-			else
-				print_checked(express->index, express->n);
-			head = express;
-		}
-		head = head->next;
+		pChecked(express->index, express->n);
+		return (search(list, list->index, express->index, value));
 	}
-	return (NULL);
+
+	while (express->next)
+	{
+		if (express->express)
+		{
+			pChecked(express->index, express->n);
+			lastExpress = express->express;
+		}
+		if (express->express && express->express->n >= value)
+		{
+			pChecked(express->express->index, express->express->n);
+			index = express->express->index;
+			return (search(express, express->index, index, value));
+		}
+		express = express->next;
+	}
+
+	pChecked(lastExpress->index, lastExpress->n);
+	return (search(lastExpress, lastExpress->index, express->index, value));
 }

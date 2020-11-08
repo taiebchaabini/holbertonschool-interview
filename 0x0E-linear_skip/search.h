@@ -22,8 +22,8 @@ typedef struct skiplist_s
 	struct skiplist_s *express;
 } skiplist_t;
 
-void print_checked(size_t first, int second);
-void print_found(size_t first, size_t second);
+void pChecked(size_t first, int second);
+skiplist_t *search(skiplist_t *nlane, size_t f, size_t s, int value);
 skiplist_t *linear_skip(skiplist_t *list, int value);
 
 #endif
