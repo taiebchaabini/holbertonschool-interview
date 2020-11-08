@@ -32,7 +32,6 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 {
 	skiplist_t *head;
 	skiplist_t *express;
-	skiplist_t *next;
 
 	if (list == NULL)
 		return (NULL);
