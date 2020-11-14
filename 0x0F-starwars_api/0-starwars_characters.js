@@ -1,29 +1,27 @@
 #!/usr/bin/node
+console.log()
 let movieID = process.argv[2];
+const request = require('request');
 
-const request = require('request-promise');
-var res = []
+var res = {}
 
-async function getCharacter(input) {
-       try {
-          return await request({url: input, json: true});
-       } catch (e) {
-          console.error(e)
-       }  
- }
+request({url: 'https://swapi-api.hbtn.io/api/films/' + movieID, json: true}, function (error, response, body) {
 
-request({url: 'https://swapi-api.hbtn.io/api/films/' + movieID, json: true}).then(body => {
+  if (response && response.statusCode == 200){
+    // console.log('body:', body); // Print the HTML for the Google homepage.
+ 
+    body.characters.forEach(element => {
+        let id = element.replace("https://swapi-api.hbtn.io/api/people", "");
+        id = id.split("/")[1];
+        request({url: element, json: true}, function(error, response, body){
+            if (response && response.statusCode == 200){
+                console.log(body.name);
+            }
+        });
 
-    body.characters.forEach(link => {
-        console.log(link);
-        res.push(getCharacter(link));
-    })
+    });;
 
-    res.forEach(elem => { 
-        elem.then(character => { console.log(character.name) } );
-    })
-   
-        
+ 
+  } 
 });
-
 
