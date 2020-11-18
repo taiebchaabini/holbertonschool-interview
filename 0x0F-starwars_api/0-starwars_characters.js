@@ -8,7 +8,6 @@ request({ url: 'https://swapi-api.hbtn.io/api/films/' + movieID, json: true }, f
   }
   if (response && response.statusCode === 200) {
     const res = {};
-    // console.log('body:', body); // Print the HTML for the Google homepage.
 
     body.characters.forEach(element => {
       let id = element.replace('https://swapi-api.hbtn.io/api/people', '');
@@ -18,7 +17,6 @@ request({ url: 'https://swapi-api.hbtn.io/api/films/' + movieID, json: true }, f
           return;
         }
         if (response && response.statusCode === 200) {
-          // console.log(body.name);
           res[id] = body.name;
         }
       });
