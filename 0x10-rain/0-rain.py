@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import math
 """
 Calculate how much water will be retained after it rains.
 Wall width is 1
