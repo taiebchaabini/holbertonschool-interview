@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+"""
+Calculate how much water will be retained after it rains.
+Wall width is 1
+"""
+
+
 def rain(walls):
     i = 0
     rainAmount = 0
