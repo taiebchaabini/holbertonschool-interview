@@ -12,7 +12,7 @@ def rain(walls):
         return (0)
     for element in walls:
         i += 1
-        if (i < len(walls) - 1 and i % 2 == 0):
+        if (i > 0 and i < len(walls) - 1):
             if (abs(walls[i - 1] - walls[i + 1]) > walls[i]):
                 if (walls[i - 1] < walls[i + 1]):
                     rainAmount += walls[i - 1]
