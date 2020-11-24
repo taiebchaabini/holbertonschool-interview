@@ -18,4 +18,8 @@ def rain(walls):
                 rainFill = abs(walls[i - 1] - walls[i])
                 rainAmount += rainFill
                 walls[i] += rainFill
+                if (walls[i + 1] < walls[i]):
+                    rainAmount -= walls[i]
+                    walls[i] = walls[i + 1]
+                    rainAmount += walls[i]
     return (rainAmount)
