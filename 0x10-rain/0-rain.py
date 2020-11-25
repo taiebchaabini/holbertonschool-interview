@@ -17,11 +17,10 @@ def rain(walls):
         for L in range(0, i):
             if (walls[L] > leftPeak):
                 leftPeak = walls[L]
-        for R in range(i, wallsLength):
+        for R in range(i, wallsLength - 1):
             if (walls[R] > rightPeak):
                 rightPeak = walls[R]
         rainFill = min(leftPeak, rightPeak)
         rainFill = abs(walls[i] - rainFill)
         rainAmount += rainFill
-        walls[i] = rainFill
     return (rainAmount)
