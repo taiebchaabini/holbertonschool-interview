@@ -6,20 +6,20 @@ Wall width is 1
 
 
 def rain(walls):
-    i = 0
     rainAmount = 0
     rainFill = 0
-    if (len(walls) == 0):
+    wallsLength = len(walls)
+    if (wallsLength == 0):
         return (0)
-    for element in walls:
-        if (i > 0 and i < len(walls) - 1):
+    for i in range(wallsLength - 1):
+        if (i >= 1 and i < wallsLength - 1):
             if (walls[i - 1] > walls[i]):
                 rainFill = abs(walls[i - 1] - walls[i])
+                for b in range(i + 1, wallsLength):
+                    if (walls[b] > 0):
+                        break
+                if (rainFill > walls[b]):
+                    rainFill = abs(walls[b] - walls[i])
                 rainAmount += rainFill
                 walls[i] += rainFill
-                if (walls[i + 1] < walls[i]):
-                    rainAmount -= walls[i]
-                    walls[i] = walls[i + 1]
-                    rainAmount += walls[i]
-        i += 1
     return (rainAmount)
