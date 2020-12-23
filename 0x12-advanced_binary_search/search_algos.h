@@ -1,5 +1,5 @@
-#ifndef search_algos
-#define search_algos
+#ifndef search_algos_h
+#define search_algos_h
 #include <stdio.h>
 void print_array(int *array, size_t start, size_t end);
 int binary_search(int *array, size_t start, size_t end, int value);
