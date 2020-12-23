@@ -90,11 +90,6 @@ int heap_extract(heap_t **root)
 	leaf = find_leaf((*root));
 	tmp = (*root);
 
-
-	if (leaf == NULL)
-		return (0);
-
-
 	tmp->left->parent = leaf;
 	leaf->left = tmp->left;
 
