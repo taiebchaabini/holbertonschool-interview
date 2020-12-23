@@ -81,7 +81,9 @@ int heap_extract(heap_t **root)
 	heap_t *leaf, *tmp;
 	int rootValue;
 
-	if (!*root || root)
+	if (root == NULL)
+		return (0);
+	if ((*root) == NULL)
 		return (0);
 
 	rootValue = (*root)->n;
