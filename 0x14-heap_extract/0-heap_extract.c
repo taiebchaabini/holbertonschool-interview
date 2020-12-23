@@ -81,13 +81,14 @@ int heap_extract(heap_t **root)
 	heap_t *leaf, *tmp;
 	int rootValue;
 
-	if (root == NULL)
-		return (0);
-	if ((*root) == NULL)
+	if (!*root || root)
 		return (0);
 
 	rootValue = (*root)->n;
 	leaf = find_leaf((*root));
+
+	if (leaf == NULL)
+		return (0);
 	tmp = (*root);
 
 	tmp->left->parent = leaf;
