@@ -79,14 +79,17 @@ void siftDown(heap_t **parent)
 int heap_extract(heap_t **root)
 {
 	heap_t *leaf, *tmp;
+	int rootValue;
 
 	if (root == NULL)
 		return (0);
 	if ((*root) == NULL)
 		return (0);
 
+	rootValue = (*root)->n;
 	leaf = find_leaf((*root));
 	tmp = (*root);
+
 
 	if (leaf == NULL)
 		return (0);
@@ -108,5 +111,5 @@ int heap_extract(heap_t **root)
 
 	free(tmp);
 	siftDown(root);
-	return (leaf->n);
+	return (rootValue);
 }
