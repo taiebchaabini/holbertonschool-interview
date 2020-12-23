@@ -30,7 +30,7 @@ int tree_depth(heap_t *root)
 heap_t *find_leaf(heap_t *root)
 {
 	if (root == NULL)
-		return;
+		return (NULL);
 	if (!root->right && !root->left)
 		return (root);
 
@@ -60,8 +60,8 @@ void siftDown(heap_t **parent)
 {
 	heap_t *target = (*parent);
 
-	while (target->left && target->n < target->left->n ||
-			target->right && target->n < target->right->n)
+	while ((target->left && target->n < target->left->n) ||
+			(target->right && target->n < target->right->n))
 	{
 
 		if (target->left && target->right && target->left->n > target->right->n)
@@ -78,8 +78,19 @@ void siftDown(heap_t **parent)
  **/
 int heap_extract(heap_t **root)
 {
-	heap_t *leaf = find_leaf((*root));
-	heap_t *tmp = (*root);
+	heap_t *leaf, *tmp;
+
+	if (root == NULL)
+		return (0);
+	if ((*root) == NULL)
+		return (0);
+
+	leaf = find_leaf((*root));
+	tmp = (*root);
+
+	if (leaf == NULL)
+		return (0);
+
 
 	tmp->left->parent = leaf;
 	leaf->left = tmp->left;
