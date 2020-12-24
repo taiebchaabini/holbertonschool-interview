@@ -63,11 +63,13 @@ void siftDown(heap_t **parent)
 	while ((target->left && target->n < target->left->n) ||
 			(target->right && target->n < target->right->n))
 	{
-
-		if (target->left && target->right && target->left->n > target->right->n)
-			target = target->left;
-		else if (target->right->n > target->left->n)
+		if (target->right && target->left)
+			target = target->left->n > target->right->n ? target->left : target->right;
+		if (target->right && target->right->n > target->n)
 			target = target->right;
+		else if (target->left && target->left->n > target->n)
+			target = target->left;
+
 		swap_nodes(target->parent, target);
 	}
 }
@@ -81,27 +83,34 @@ int heap_extract(heap_t **root)
 	heap_t *leaf, *tmp;
 	int rootValue;
 
-	if (root == NULL)
-		return (0);
 	if ((*root) == NULL)
 		return (0);
 
 	rootValue = (*root)->n;
+	if (!(*root)->left && !(*root)->right)
+	{
+		free((*root));
+		*root = NULL;
+		return (rootValue);
+	}
 	leaf = find_leaf((*root));
 
 	if (leaf == NULL)
 		return (0);
 	tmp = (*root);
-
-	tmp->left->parent = leaf;
-	leaf->left = tmp->left;
-
-	tmp->right->parent = leaf;
-	leaf->right = tmp->right;
-
-	if (leaf->parent->left == leaf)
+	if (tmp->left)
+	{
+		tmp->left->parent = leaf;
+		leaf->left = tmp->left;
+	}
+	if (tmp->right)
+	{
+		tmp->right->parent = leaf;
+		leaf->right = tmp->right;
+	}
+	if (leaf->parent->left && leaf->parent->left == leaf)
 		leaf->parent->left = NULL;
-	else if (leaf->parent->right == leaf)
+	else if (leaf->parent->right && leaf->parent->right == leaf)
 		leaf->parent->right = NULL;
 
 	leaf->parent = tmp->parent;
@@ -109,5 +118,6 @@ int heap_extract(heap_t **root)
 
 	free(tmp);
 	siftDown(root);
+
 	return (rootValue);
 }
