@@ -1,16 +1,15 @@
 #!/usr/bin/python3
-""" Rotates en 2D matrix in place """
-def rotate_2d_matrix(matrix):
+""" Rotates en 2D matrix in place clockwise """
 
-    for row in range(len(matrix)):
-        for column in range(row):
-            tmp = matrix[row][column]
-            matrix[row][column] = matrix[column][row]
-            matrix[column][row] = tmp
-   
-    for row in range(len(matrix)):
-        i = len(matrix[row]) - 1
-        tmp = matrix[row][i]
-        matrix[row][i] = matrix[row][0]
-        matrix[row][0] = tmp
 
+def rotate_2d_matrix(m):
+    LEN = len(m)
+    for row in range(1):
+        for column in range(row, LEN - row - 1):
+            """ First element """
+            tmp = m[row][column]
+            """ Left Bottom -> Clockwise """
+            m[row][column] = m[LEN - 1 - column][row]
+            m[LEN - 1 - column][row] = m[LEN - 1 - row][LEN - 1 - column]
+            m[LEN - 1 - row][LEN - 1 - column] = m[column][LEN - 1 - row]
+            m[column][LEN - 1 - row] = tmp
