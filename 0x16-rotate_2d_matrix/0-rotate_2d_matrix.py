@@ -4,7 +4,7 @@
 
 def rotate_2d_matrix(m):
     LEN = len(m)
-    for row in range(1):
+    for row in range(int(LEN / 2)):
         for column in range(row, LEN - row - 1):
             """ First element """
             tmp = m[row][column]
