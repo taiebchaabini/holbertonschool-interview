@@ -1,14 +1,12 @@
 #!/usr/bin/python3
-import json
-import re
-import time
-import urllib.request
-
-
 """
     Parses the title of all hot articles, and prints a sorted
     count of given keywords (case-insensitive, delimited by spaces.
 """
+import json
+import re
+import time
+import urllib.request
 
 
 def count_elements(request, word_list, results):
