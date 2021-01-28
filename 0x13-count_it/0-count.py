@@ -6,7 +6,7 @@
 import json
 import re
 import time
-import urllib.request
+import requests
 
 
 def count_elements(request, word_list, results):
@@ -33,10 +33,12 @@ def count_words(subreddit, word_list, count=0, results={}):
             word_list[i] = word_list[i].lower()
 
     link = baseLink + "?q=%s&sort=hot" % word_list[count]
-    req = urllib.request.Request(link)
-    req.add_header('User-agent', 'HolbertonSchoolTask')
-    with urllib.request.urlopen(req) as response:
-        data = response.read()
+    customHeaders = {'User-agent': 'HolbertonSchoolTask'}
+    r = requests.get(link, headers=customHeaders, allow_redirects=False)
+
+    if (r.status_code != 200):
+        return
+    data = r.content
 
     data = json.loads(data.decode('utf-8'))
     if (count < len(word_list) - 1):
