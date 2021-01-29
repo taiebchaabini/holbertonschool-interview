@@ -34,7 +34,8 @@ def count_words(subreddit, word_list, count=0, results={}):
 
     link = baseLink + "?q=%s&sort=hot" % word_list[count]
     customHeaders = {'User-agent': 'HolbertonSchoolTask'}
-    r = requests.get(link, headers=customHeaders, allow_redirects=False)
+    param = {'limit': 100}
+    r = requests.get(link, headers=customHeaders, params=param, allow_redirects=False)
 
     if (r.status_code != 200):
         return
