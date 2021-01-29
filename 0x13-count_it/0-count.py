@@ -46,6 +46,6 @@ def count_words(subreddit, word_list, count=0, results={}):
         count_words(subreddit, word_list, count + 1, results)
     else:
         results = sorted(
-            results.items(), key=lambda x: (x[1], x[0]), reverse=True
+            results.items(), key=lambda x: (-x[1], x[0]), reverse=False
             )
         print(results)
