@@ -25,14 +25,14 @@ def count_elements(request, word_list, results):
 
 def count_words(subreddit, word_list, count=0, results={}):
     """ Main function to count and print the words """
-    baseLink = 'https://api.reddit.com/r/%s/search/' % subreddit
+    baseLink = 'https://api.reddit.com/r/%s/hot.json' % subreddit
     link = ""
 
     if (link == ""):
         for i in range(len(word_list)):
             word_list[i] = word_list[i].lower()
 
-    link = baseLink + "?q=%s&sort=hot" % word_list[count]
+    link = baseLink
     customHeaders = {'User-agent': 'HolbertonSchoolTask'}
     param = {'limit': 100}
     r = requests.get(link, headers=customHeaders,
