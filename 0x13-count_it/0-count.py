@@ -38,12 +38,13 @@ def count_words(subreddit, word_list, results={}, param={'limit': 100}):
 
     data = json.loads(data.decode('utf-8'))
     param = {'limit': 100, 'count': 100, 'after': data['data'].get('after')}
-    if (param['after'] is not None):
+    if (data['data'].get('after') is None):
         results = count_elements(data, word_list, results)
-        count_words(subreddit, word_list, results, param)
-    else:
         results = sorted(
             results.items(), key=lambda x: (-x[1], x[0]), reverse=False
             )
         for i in results:
             print("{}: {}".format(i[0], i[1]))
+    else:
+        results = count_elements(data, word_list, results)
+        count_words(subreddit, word_list, results, param)
