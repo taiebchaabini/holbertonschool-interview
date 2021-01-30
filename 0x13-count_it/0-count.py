@@ -17,15 +17,18 @@ def count_elements(request, word_list, results):
             datas[i] = datas[i].lower()
             if (datas[i] in word_list):
                 if (datas[i] in results.keys()):
-                    results[datas[i]] += datas[i].count(datas[i])
+                    results[datas[i]] += word_list.count(datas[i])
                 else:
-                    results[datas[i]] = datas[i].count(datas[i])
+                    results[datas[i]] = word_list.count(datas[i])
     return results
 
 
 def count_words(subreddit, word_list, results={}, param={'limit': 100}):
     """ Main function to count and print the words """
     baseLink = 'https://api.reddit.com/r/%s/hot.json' % subreddit
+
+    if ('after' not in param):
+        word_list = [str.lower() for str in word_list]
 
     link = baseLink
     customHeaders = {'User-agent': 'HolbertonSchoolTask'}
