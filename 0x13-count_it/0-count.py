@@ -5,8 +5,9 @@
 """
 import json
 import re
-import time
 import requests
+import time
+
 
 
 def count_elements(request, word_list, results):
