@@ -32,6 +32,9 @@ int main(int argc, char **argv)
 		}
 	}
 
+	if (argv[1][len - 1] == '0' || argv[2][len2 - 1] == '0')
+		_print_error();
+
 	_mul(argv[1], argv[2], len, len2);
 	return (0);
 }
@@ -86,7 +89,7 @@ void _mul(char *nb, char *nb2, int nblength, int nb2length)
 
 	i = nblength + nb2length + 1;
 
-	while (res[i] == 0)
+	while (res[i] == '0')
 		i--;
 
 	for (; i >= 0; i--)
