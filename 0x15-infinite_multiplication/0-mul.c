@@ -5,7 +5,7 @@
  * main - program that multiplies two positive numbers
  * @argc: number of arguments
  * @argv: given arguments
- * Return: returns 1 if everything is fine otherwise 98 with an error
+ * Return: returns 0 if everything is fine otherwise 98 with an error
  **/
 int main(int argc, char **argv)
 {
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 	}
 
 	_mul(argv[1], argv[2], len, len2);
-	return (1);
+	return (0);
 }
 /**
  * _strlen - Calculates the length of a string
