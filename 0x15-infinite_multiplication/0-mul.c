@@ -8,8 +8,7 @@
  **/
 int main(int argc, char **argv)
 {
-	int i, y;
-	int len, len2;
+	int i, y, len, len2;
 
 	if (argc != 3)
 		_print_error();
@@ -30,27 +29,25 @@ int main(int argc, char **argv)
 		}
 	}
 
-	_check_zero(argv[1]);
-	_check_zero(argv[2]);
 
-	_mul(argv[1], argv[2], len, len2);
-	return (0);
-}
-/**
- * _check_zero - checks if string argument is 0
- * @str: string to check
- **/
-void _check_zero(char *str)
-{
-	int y = 0, i = 0;
-
-	for (y = 0, i = 0; str[y] != '\0'; y++)
+	for (y = 0, i = 0; argv[1][y] != '\0'; y++)
 	{
-		if (str[y] != '0')
+		if (argv[1][y] != '0')
 			i++;
 	}
 	if (i == 0)
 		_print_error();
+
+	for (y = 0, i = 0; argv[2][y] != '\0'; y++)
+	{
+		if (argv[2][y] != '0')
+			i++;
+	}
+	if (i == 0)
+		_print_error();
+
+	_mul(argv[1], argv[2], len, len2);
+	return (0);
 }
 /**
  * _strlen - Calculates the length of a string
