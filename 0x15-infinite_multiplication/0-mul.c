@@ -70,7 +70,7 @@ void _mul(char *nb, char *nb2, int nblength, int nb2length)
 	{
 		_nb = nb[a] - '0';
 
-		for (b = b = nb2length - 1, next = 0; b >= 0; b--, counter2++)
+		for (b = nb2length - 1, next = 0; b >= 0; b--, counter2++)
 		{
 			_nb2 = nb2[b] - '0';
 
