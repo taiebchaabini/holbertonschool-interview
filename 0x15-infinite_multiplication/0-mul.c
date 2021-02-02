@@ -12,7 +12,6 @@ int main(int argc, char **argv)
 	int i, y;
 	int len, len2;
 
-
 	if (argc != 3)
 		_print_error();
 
@@ -32,11 +31,27 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if (argv[1][len - 1] == '0' || argv[2][len2 - 1] == '0')
-		_print_error();
+	_check_zero(argv[1]);
+	_check_zero(argv[2]);
 
 	_mul(argv[1], argv[2], len, len2);
 	return (0);
+}
+/**
+ * _check_zero - checks if string argument is 0
+ * @str: string to check
+ **/
+void _check_zero(char *str)
+{
+	int y = 0, i = 0;
+
+	for (y = 0, i = 0; str[y] != '\0'; y++)
+	{
+		if (str[y] != '0')
+			i++;
+	}
+	if (i == 0)
+		_print_error();
 }
 /**
  * _strlen - Calculates the length of a string
@@ -89,7 +104,7 @@ void _mul(char *nb, char *nb2, int nblength, int nb2length)
 
 	i = nblength + nb2length + 1;
 
-	while (res[i] == '0')
+	while (res[i] == 0)
 		i--;
 
 	for (; i >= 0; i--)
