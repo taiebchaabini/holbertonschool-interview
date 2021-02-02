@@ -8,7 +8,7 @@
  **/
 int main(int argc, char **argv)
 {
-	int i, y, len, len2;
+	int i, y, len, len2, zero;
 
 	if (argc != 3)
 		_print_error();
@@ -19,32 +19,24 @@ int main(int argc, char **argv)
 	for (y = 1; y <= 2; y++)
 	{
 		i = 0;
+		zero = 0;
 		while (argv[y][i] != '\0')
 		{
 			if ((_isDigit(argv[y][i]) == 0) ||
 					(_isDigit(argv[y][i]) == 2 && i != 0) ||
 					(_isDigit(argv[y][i]) == 2 && _strlen(argv[y]) == 1))
 				_print_error();
+			if (argv[y][i] != '0')
+				zero++;
 			i++;
 		}
+		if (zero == 0)
+		{
+			_putchar('0');
+			_putchar('\n');
+			return (0);
+		}
 	}
-
-
-	for (y = 0, i = 0; argv[1][y] != '\0'; y++)
-	{
-		if (argv[1][y] != '0')
-			i++;
-	}
-	if (i == 0)
-		_print_error();
-
-	for (y = 0, i = 0; argv[2][y] != '\0'; y++)
-	{
-		if (argv[2][y] != '0')
-			i++;
-	}
-	if (i == 0)
-		_print_error();
 
 	_mul(argv[1], argv[2], len, len2);
 	return (0);
