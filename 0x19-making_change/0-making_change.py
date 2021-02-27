@@ -10,9 +10,12 @@ def makeChange(coins, total):
         return (-1)
     coins = reversed(sorted(coins))
     opSum = 0
+    hit = total
     for i in coins:
         opSum += int(total / i)
         total -= int(total / i) * i
-        if (total == 0):
+        if (hit == 0):
             return (opSum)
+        if (hit < 0):
+            return (-1)
     return (-1)
