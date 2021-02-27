@@ -13,6 +13,6 @@ def makeChange(coins, total):
     for i in coins:
         opSum += int(total / i)
         total -= int(total / i) * i
-        if (hit == 0):
+        if (total == 0):
             return (opSum)
     return (-1)
