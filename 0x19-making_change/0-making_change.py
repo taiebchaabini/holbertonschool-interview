@@ -11,7 +11,7 @@ def makeChange(coins, total):
     fewest number of coins needed to meet a given amount total.
     """
     if (total <= 0):
-        return (-1)
+        return (0)
     coins = reversed(sorted(coins))
     opSum = 0
     for i in coins:
