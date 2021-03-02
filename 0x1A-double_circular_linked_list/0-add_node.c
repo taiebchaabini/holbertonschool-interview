@@ -27,7 +27,11 @@ List *create_node(char *str)
 List *add_node_end(List **list, char *str)
 {
 	if (*list == NULL)
+	{
 		*list = create_node(str);
+		(*list)->next = *list;
+		(*list)->prev = *list;
+	}
 	else
 	{
 		List *head = *list;
@@ -63,7 +67,11 @@ List *add_node_end(List **list, char *str)
 List *add_node_begin(List **list, char *str)
 {
 	if (*list == NULL)
+	{
 		*list = create_node(str);
+		(*list)->next = *list;
+		(*list)->prev = *list;
+	}
 	else
 	{
 		List *head = *list;
