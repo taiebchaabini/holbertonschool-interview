@@ -1,5 +1,4 @@
 #include "list.h"
-#include <stdio.h>
 
 /**
  * create_node - Creates a new node
