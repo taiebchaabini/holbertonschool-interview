@@ -14,6 +14,8 @@ List *create_node(char *str)
 	node->str = strdup(str);
 	if (node->str == NULL)
 		return (NULL);
+	node->next = node;
+	node->prev = node;
 	return (node);
 }
 
