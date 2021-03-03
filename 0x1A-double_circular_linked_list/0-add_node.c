@@ -28,6 +28,8 @@ List *add_node_end(List **list, char *str)
 	if (*list == NULL)
 	{
 		*list = create_node(str);
+		if ((*list) != NULL)
+			return (*list);
 	}
 	else
 	{
@@ -51,7 +53,7 @@ List *add_node_end(List **list, char *str)
 
 		return (end);
 	}
-	return (*list);
+	return (NULL);
 }
 
 /**
@@ -66,6 +68,8 @@ List *add_node_begin(List **list, char *str)
 	if (*list == NULL)
 	{
 		*list = create_node(str);
+		if ((*list) != NULL)
+			return (*list);
 	}
 	else
 	{
