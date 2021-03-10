@@ -42,7 +42,7 @@ void radix_sort(int *array, size_t size)
 	    step = 0, b = 0, digit = 0, count = 0;
 	unsigned int i = 0;
 
-	if (size <= 2)
+	if (size < 2)
 		return;
 	largest = find_largest(array, size);
 
