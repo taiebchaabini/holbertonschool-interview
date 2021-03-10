@@ -4,10 +4,10 @@
  * @array: Array where to find the number
  * @size: Size of the array
  * Return: returns number of digit of the longest number
-**/
+ **/
 int find_largest(int *array, size_t size)
 {
-	int i = 0, b = 0, number = 0, l = 0;
+	unsigned int i = 0, b = 0, number = 0, l = 0;
 
 	for (i = 0; i < size; i++)
 	{
@@ -38,8 +38,9 @@ void free_buckets(int *b[9])
  **/
 void radix_sort(int *array, size_t size)
 {
-	int *buckets[9], bSize[9], i = 0, largest = 0, tmp = 0,
+	int *buckets[9], bSize[9], largest = 0, tmp = 0,
 	    step = 0, b = 0, digit = 0, count = 0;
+	unsigned int i = 0;
 
 	largest = find_largest(array, size);
 
@@ -53,7 +54,7 @@ void radix_sort(int *array, size_t size)
 			buckets[i][0] = -1;
 		}
 
-		for (i = 0; i < size; i++)
+		for (i = 0; i != size; i++)
 		{
 			tmp = array[i];
 			for (b = 0; b < step; b++)
