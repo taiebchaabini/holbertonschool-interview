@@ -86,9 +86,9 @@ void topDown_SplitMerge(int *array, int start, int end, int *copy)
 void merge_sort(int *array, size_t size)
 {
 	int *copy;
+	size_t i = 0;
 
 	copy = malloc(sizeof(int) * size);
-	size_t i = 0;
 
 	for (i = 0; i < size; i++)
 		copy[i] = array[i];
