@@ -28,7 +28,6 @@ void topDown_Merge(int *array, int start, int mid, int end, int *copy)
 			m = m + 1;
 		}
 	}
-	printf("\n");
 }
 
 /**
@@ -68,6 +67,7 @@ void topDown_SplitMerge(int *array, int start, int end, int *copy)
 
 	topDown_Merge(array, start, mid, end, copy);
 
+	printf("\n");
 	printf("[Done]: ");
 	for (i = start; i < end; i++)
 	{
@@ -94,4 +94,5 @@ void merge_sort(int *array, size_t size)
 		copy[i] = array[i];
 
 	topDown_SplitMerge(array, 0, size, copy);
+	free(copy);
 }
