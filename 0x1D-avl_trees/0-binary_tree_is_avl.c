@@ -32,9 +32,9 @@ void inOrder_checkBST(binary_tree_t *tree, int dir, int max, int *count)
 	inOrder_checkBST(tree->right, dir, max, count);
 	if (tree->left && tree->right && tree->left->n > tree->right->n)
 		*count -= 1;
-	if (dir == 0 && tree->n > max)
+	if (dir == 0 && tree->n >= max)
 		*count -= 1;
-	if (dir == 1 && tree->n < max)
+	if (dir == 1 && tree->n <= max)
 		*count -= 1;
 }
 
