@@ -49,9 +49,12 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
+
 	leftHeight = 0, rightHeight = 0, count = 0;
-	leftHeight = tree_max_height((binary_tree_t *)tree->left) - 1;
-	rightHeight = tree_max_height((binary_tree_t *)tree->right) - 1;
+	if (tree->left)
+		leftHeight = tree_max_height((binary_tree_t *)tree->left) - 1;
+	if (tree->right)
+		rightHeight = tree_max_height((binary_tree_t *)tree->right) - 1;
 	if (leftHeight + rightHeight == 1)
 		return (1);
 	if (leftHeight - rightHeight >= 1 || leftHeight - rightHeight < 0)
