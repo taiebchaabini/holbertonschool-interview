@@ -53,7 +53,7 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 	leftHeight = 0, rightHeight = 0, count = 0;
 	leftHeight = tree_max_height((binary_tree_t *)tree->left) - 1;
 	rightHeight = tree_max_height((binary_tree_t *)tree->right) - 1;
-	if (leftHeight - rightHeight > 1 || leftHeight - rightHeight < 0)
+	if (leftHeight - rightHeight >= 1 || leftHeight - rightHeight < 0)
 		return (0);
 	inOrder_checkBST((binary_tree_t *)tree->left, 0, tree->n, &count);
 	if (count < 0)
