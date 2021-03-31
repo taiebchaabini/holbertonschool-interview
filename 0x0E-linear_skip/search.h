@@ -25,5 +25,7 @@ typedef struct skiplist_s
 void pChecked(size_t first, int second);
 skiplist_t *search(skiplist_t *nlane, size_t f, size_t s, int value);
 skiplist_t *linear_skip(skiplist_t *list, int value);
-
+skiplist_t *create_skiplist(int *array, size_t size);
+void print_skiplist(const skiplist_t *list);
+void free_skiplist(skiplist_t *list);
 #endif
