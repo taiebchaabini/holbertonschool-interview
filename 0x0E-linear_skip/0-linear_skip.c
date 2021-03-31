@@ -32,6 +32,7 @@ skiplist_t *search(skiplist_t *nlane, size_t f, size_t s, int value)
 		}
 		nlane = nlane->next;
 	}
+	return (NULL);
 }
 
 
