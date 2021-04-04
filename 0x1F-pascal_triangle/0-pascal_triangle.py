@@ -10,7 +10,7 @@ def pascal_triangle(n):
     """
     myList = [[1]]
     if (n <= 0):
-        return [[]]
+        return []
     for i in range(1, n):
         myList.append([1])
         for b in range(1, i):
